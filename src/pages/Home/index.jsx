@@ -1,3 +1,6 @@
+import { DragDrop } from "@/components"
+
+
 const Home = () => {
     return <>
     </>

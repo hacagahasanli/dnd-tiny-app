@@ -1,6 +1,6 @@
 import { images } from "../../constants"
 
-const DragDrop = () => {
+export const DragDrop = () => {
     return (
         <>
             <div></div>
