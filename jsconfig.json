@@ -3,7 +3,6 @@
         "target": "es2021",
         "baseUrl": "./src",
         "paths": {
-            "@/*": ["*"],
             "components/*": ["components/*"],
             "assets/*": ["assets/*"],
             "pages/*": ["pages/*"],

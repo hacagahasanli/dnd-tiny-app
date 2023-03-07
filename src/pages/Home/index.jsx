@@ -1,8 +1,8 @@
-import { DragDrop } from "@/components"
-
+import { DragDrop } from "components/index"
 
 const Home = () => {
     return <>
+        <DragDrop />
     </>
 }
 
