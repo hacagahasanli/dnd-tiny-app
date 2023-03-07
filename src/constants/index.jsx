@@ -10,5 +10,13 @@ export const images = [
     {
         id: 3,
         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 4,
+        uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 5,
+        uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
     }
 ]
