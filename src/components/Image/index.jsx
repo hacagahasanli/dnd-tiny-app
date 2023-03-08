@@ -39,8 +39,6 @@ function CustomDragPreview() {
         return null;
     }
 
-    console.log(currentOffset, "CURRENT OF SET")
-
     return (
         <div style={{
             zIndex: "-10",
