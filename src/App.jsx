@@ -2,7 +2,7 @@ import Home from "./pages/Home"
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App" style={{ width: "100%" }}>
       <Home />
     </div>
   )
