@@ -38,17 +38,37 @@ export const DragDrop = () => {
     }), [imagesS])
 
 
+    const [{ isOverT }, dropT] = useDrop(() => ({
+        accept: "image",
+        drop: ({ id }) => addImageToImages(id),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    }), [imageSets])
+
+    const providerHandler = (images, id) => {
+        const image = images?.find((image) => image?.id === id)
+        const isLocated = images?.some((item) => item?.id === image?.id)
+        const filteredImages = images?.filter((image) => image?.id !== id)
+        return { image, isLocated, filteredImages }
+    }
+
     const addImageToSet = async (id) => {
-        const image = imagesS?.find((image) => image?.id === id)
-        const isLocated = imagesS?.some((item) => item?.id === image?.id)
-        const filteredImages = imagesS?.filter((image) => image?.id !== id)
+        const { image, isLocated, filteredImages } = providerHandler(imagesS, id)
         setImagesS(filteredImages)
-        if(isLocated) setImagesSets((prev) => [...prev, image])
+        if (isLocated) setImagesSets((prev) => [...prev, image])
+    }
+
+
+    const addImageToImages = async (id) => {
+        const { image, isLocated, filteredImages } = providerHandler(imageSets, id)
+        setImagesSets(filteredImages)
+        if (isLocated) setImagesS((prev) => [...prev, image])
     }
 
     return (
-        <div style={{ width: "100%", padding: 0, position: "relative" }} ref={drop}>
-            <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", flexWrap: "wrap", minWidth: "800px", margin: "0 auto" }}>
+        <div style={{ width: "100%", padding: 0, position: "relative" }} >
+            <div ref={dropT} style={{ display: "flex", gap: ".5rem", justifyContent: "center", flexWrap: "wrap", minWidth: "800px", minHeight: "300px", margin: "0 auto" }}>
                 {imagesS?.map(({ uri, id }) => <Image key={id} uri={uri} id={id} />)}
             </div>
             <div style={style} ref={drop} >
@@ -63,7 +83,7 @@ const style = {
     border: "1px solid #c1c1c1",
     width: "700px",
     minHeight: "200px",
-    margin: "8rem auto",
+    margin: "5rem auto",
     display: "grid",
     justifyContent: "center",
     placeItems: "center",
