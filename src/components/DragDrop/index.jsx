@@ -40,9 +40,10 @@ export const DragDrop = () => {
 
     const addImageToSet = async (id) => {
         const image = imagesS?.find((image) => image?.id === id)
+        const isLocated = imagesS?.some((item) => item?.id === image?.id)
         const filteredImages = imagesS?.filter((image) => image?.id !== id)
         setImagesS(filteredImages)
-        setImagesSets((prev) => [...prev, image])
+        if(isLocated) setImagesSets((prev) => [...prev, image])
     }
 
     return (
