@@ -9,6 +9,7 @@ export const Image = ({ uri, id }) => {
             isDragging: !!monitor.isDragging()
         })
     }))
+
     return (
         <>
             <div ref={drag} style={{ width: "200px", height: "auto", display: "inline-block", opacity: 1 }}>
@@ -46,7 +47,7 @@ function CustomDragPreview() {
             width: "300px",
             height: "300px",
             left: currentOffset?.x ,
-            top: currentOffset?.y + 100,
+            top: currentOffset?.y - 100,
             opacity:"0.7"
         }}>
             <img src={item.uri} alt={item.id} width={"200px"} height={"200px"} />

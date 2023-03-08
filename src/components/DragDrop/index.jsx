@@ -29,7 +29,7 @@ export const DragDrop = () => {
         }
     ])
 
-    const [{ isOver }, drop] = useDrop(() => ({
+    const [{ isOverT }, drop] = useDrop(() => ({
         accept: "image",
         drop: ({ id }) => addImageToSet(id),
         collect: (monitor) => ({
@@ -38,7 +38,7 @@ export const DragDrop = () => {
     }), [imagesS])
 
 
-    const [{ isOverT }, dropT] = useDrop(() => ({
+    const [{ isOver }, dropT] = useDrop(() => ({
         accept: "image",
         drop: ({ id }) => addImageToImages(id),
         collect: (monitor) => ({
@@ -68,10 +68,11 @@ export const DragDrop = () => {
 
     return (
         <div style={{ width: "100%", padding: 0, position: "relative" }} >
-            <div ref={dropT} style={{ display: "flex", gap: ".5rem", justifyContent: "center", flexWrap: "wrap", minWidth: "800px", minHeight: "300px", margin: "0 auto" }}>
+            <div ref={dropT} style={{ display: "flex", gap: ".5rem", justifyContent: "center", flexWrap: "wrap", minWidth: "800px", minHeight: "300px", margin: "0 auto", position: "relative" }}>
                 {imagesS?.map(({ uri, id }) => <Image key={id} uri={uri} id={id} />)}
             </div>
             <div style={style} ref={drop} >
+                {isOver && <div style={{ width: "200px", height: "200px", background: "red", position: "absolute", top: "0", left: "0", zIndex: "1000" }}></div>}
                 {imageSets?.map((item, index) => <Image key={item?.id} uri={item?.uri} id={item?.id} />)}
             </div>
         </div>
