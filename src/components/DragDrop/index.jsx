@@ -1,11 +1,33 @@
 import { Image } from "components/Image"
+import { images } from "constants/index"
 import { useEffect, useState } from "react"
 import { useDrop } from "react-dnd"
 
 
 export const DragDrop = () => {
     const [imageSets, setImagesSets] = useState([])
-    const [images, setImages] = useState([])
+    const [imagesS, setImagesS] = useState([
+        {
+            id: 1,
+            uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+            id: 2,
+            uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+            id: 3,
+            uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+            id: 4,
+            uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+            id: 5,
+            uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+        }
+    ])
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "image",
@@ -13,48 +35,20 @@ export const DragDrop = () => {
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
-    }), [images])
+    }), [imagesS])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch("http://localhost:3000/images");
-            const images = await res.json()
-            setImages(images)
-        }
-        fetchData()
-    }, [])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch("http://localhost:3000/draggedImages");
-            const images = await res.json()
-            setImagesSets(images)
-        }
-        fetchData()
-    }, [])
 
     const addImageToSet = async (id) => {
-        const image = images?.find((image) => image?.id === id)
-        const filteredImages = images?.filter((image) => image?.id !== id)
-        setImages(filteredImages)
+        const image = imagesS?.find((image) => image?.id === id)
+        const filteredImages = imagesS?.filter((image) => image?.id !== id)
+        setImagesS(filteredImages)
         setImagesSets((prev) => [...prev, image])
-        await fetch(`http://localhost:3000/draggedImages`, {
-            method: "POST",
-            body: JSON.stringify(image)
-        });
-        await fetch(`http://localhost:3000/images/${image?.id}`, { method: "DELETE" });
-        const fetchData = async () => {
-            const res = await fetch("http://localhost:3000/images");
-            const images = await res.json()
-            setImages(images)
-        }
-        fetchData()
     }
 
     return (
         <div style={{ width: "100%", padding: 0, position: "relative" }} ref={drop}>
             <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", flexWrap: "wrap", minWidth: "800px", margin: "0 auto" }}>
-                {images?.map(({ uri, id }) => <Image key={id} uri={uri} id={id} />)}
+                {imagesS?.map(({ uri, id }) => <Image key={id} uri={uri} id={id} />)}
             </div>
             <div style={style} ref={drop} >
                 {imageSets?.map((item, index) => <Image key={item?.id} uri={item?.uri} id={item?.id} />)}
