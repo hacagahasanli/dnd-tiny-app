@@ -47,8 +47,8 @@ function CustomDragPreview() {
             position: "absolute",
             width: "300px",
             height: "300px",
-            left: currentOffset?.x,
-            top: currentOffset?.y,
+            left: currentOffset?.x ,
+            top: currentOffset?.y + 100,
             opacity:"0.7"
         }}>
             <img src={item.uri} alt={item.id} width={"200px"} height={"200px"} />
